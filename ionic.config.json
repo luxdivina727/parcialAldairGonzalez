@@ -1,5 +1,7 @@
 {
   "name": "parcialAldairGonzalez",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

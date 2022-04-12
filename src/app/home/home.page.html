@@ -1,20 +1,63 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
 
+<ion-toolbar>
+  <ion-title size="small"> <h6>Tienda ArtGonzalez</h6></ion-title>
+</ion-toolbar>
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div padding>
+    <ion-segment [(ngModel)]="arte">
+      <ion-segment-button value="vestimenta">
+        Vestimenta
+      </ion-segment-button>
+      <ion-segment-button value="Reliquias">
+        Reliquias
+      </ion-segment-button>
+    </ion-segment>
   </div>
+  
+  <div [ngSwitch]="arte">
+    <ion-list *ngSwitchCase="'Reliquias'">
+      <ion-item ion-item *ngFor="let item of listaTiendaArtezanal" >
+        <ion-thumbnail slot="start">
+          <ion-img [src]="item.src"></ion-img>
+        </ion-thumbnail>
+        <ion-label side="small">{{item.numeracion}}. {{item.nombre}}</ion-label>
+        <ion-button color="dark" (click)="accionUno(item)"> 
+          <ion-icon name="eye"></ion-icon>
+        </ion-button>
+  </ion-item>
+    </ion-list>
+  
+    <ion-list *ngSwitchCase="'vestimenta'">
+      <ion-item ion-item *ngFor="let item of listaVestimentaArtezanal" >
+        <ion-thumbnail slot="start">
+          <ion-img [src]="item.src"></ion-img>
+        </ion-thumbnail>
+        <ion-label side="small">{{item.numeracion}}. {{item.nombre}}</ion-label>
+        <ion-button color="dark"  (click)="accionUno(item)">
+          <ion-icon name="eye"></ion-icon>
+        </ion-button>
+        </ion-item>
+    </ion-list>
+  </div>
+  <ion-card *ngIf="ocultarUno">
+    <ion-card-header>
+      <p ><input class="input"  [(ngModel)]="item.nombre" disabled="true"/></p>           
+    </ion-card-header>
+    <ion-card-content>
+      <div class="form-group">
+        <div class="col-4">
+      <p ><textarea  rows="8" cols="25"  [(ngModel)]="item.descripcion" disabled="true"></textarea></p>
+    </div>
+    <div class="col-4 mb-2">
+      <p >Valor <input  [(ngModel)]="item.valor" disabled="true"/></p>
+    </div>
+    <div>
+      <ion-button color="primary"  (click)="goToPagina(item)">
+        <ion-icon name="basket"></ion-icon>
+        <span> Comprar Producto</span>
+      </ion-button>
+    </div>
+    </div>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

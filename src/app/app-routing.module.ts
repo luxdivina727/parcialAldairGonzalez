@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'recibo-compra/:nombre/:valor',
+    loadChildren: () => import('./recibo-compra/recibo-compra.module').then( m => m.ReciboCompraPageModule)
+  },
 ];
 
 @NgModule({
